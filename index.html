@@ -20,7 +20,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   text-align: center;
-  max-width: 400px;
+  max-width: 650px;
 }
 
 h1 {
@@ -98,13 +98,61 @@ p {
   font-size: 20px;
   cursor: pointer;
 }
+
+.instrucciones {
+  background: #fff8e1;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.instrucciones h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #444;
+}
+
+.instrucciones p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
 </style>
 </head>
 <body>
 
 <div class="container">
+  <div class="instrucciones">
+    <h2>📋 Instrucciones</h2>
+   <p>Accede a tu cuenta de Instagram desde cualquier dispositivo y dirígete al <strong>Centro de cuentas</strong>. Una vez ahí:</p>
+  <ul>
+    <p>Ve a <strong>Tu información y tus permisos</strong>.</p>
+    <p>Selecciona <strong>Descargar tu información</strong>.</p>
+    <p>Pulsa el botón <strong>Descargar o transferir información</strong>.</p>
+    <p>En la sección <strong>Parte de tu información</strong>, busca 			 		<strong>Conexiones</strong> y selecciona <strong>Seguidores y seguidos</strong>. 	 Luego pulsa <strong>Siguiente</strong>.</p>
+    <p>Elige <strong>Descargar en el dispositivo</strong>.</p>
+    <p>Selecciona el <strong>Intervalo de fechas</strong>: <em>Desde el 	
+    principio</em>, y en formato <strong>HTML</strong> (importante).</p>
+    <p>Pulsa <strong>Crear archivos</strong>.</p>
+  </ul>
+  <p>Instagram tardará unos <strong>5–10 minutos</strong> en enviarte un correo para que puedas descargar la información.</p>
+   <ul>
+<p>
+Una vez descargado el archivo, descomprímelo y accede a la carpeta <strong>connections</strong>.  
+Dentro de esta, abre la carpeta <strong>followers_and_following</strong>, donde encontrarás los archivos  
+<strong>followers_1</strong> y <strong>following</strong>. Esos son los que debes subir aquí para continuar con el proceso.
+</p>
+
+   
+  </ul>
+
+  </div>
+
   <h1>¿Quién no me sigue?</h1>
-  <p>Sube aquí tus archivos de <strong>seguidos</strong> y <strong>seguidores</strong>:</p>
+  <p>Sube aquí tus archivos de <strong>seguidos (following)</strong> y <strong>seguidores (followers_1)</strong>:</p>
 
   <button class="file-btn" id="btnSeguidos" onclick="document.getElementById('seguidos').click()">Cargar seguidos</button>
   <input type="file" id="seguidos" class="hidden-file" onchange="validarArchivo(this, 'btnSeguidos')">
@@ -115,6 +163,7 @@ p {
   <br>
   <button id="procesar" onclick="procesar()">Procesar</button>
 </div>
+
 
 <!-- Modal -->
 <div id="miModal" class="modal">
@@ -194,7 +243,7 @@ async function procesar() {
 
     const noTeSiguen = Array.from(seguidos).filter(u => !seguidores.has(u));
 
-    const blob = new Blob([noTeSiguen.join('\\n')], { type: 'text/plain' });
+    const blob = new Blob([noTeSiguen.join('\n')], { type: 'text/plain' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = "no_me_siguen.txt";
